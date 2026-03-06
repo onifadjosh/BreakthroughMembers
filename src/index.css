@@ -1,0 +1,230 @@
+:root {
+    --primary-color: #046307;
+    --primary-glow: rgba(4, 99, 7, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --secondary-bg: #f8faf8;
+    --accent-color: #034d05;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Common Background for Register and Login */
+.auth-body {
+    /* width: 100%; */
+    background: url('/images/registration-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 20px; */
+    position: relative;
+    min-height: 100vh;
+}
+
+.auth-body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+
+.registration-container, .login-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.registration-container { max-width: 550px; }
+.login-container { max-width: 450px; }
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.card-header-church {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.church-logo {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    background: white;
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.church-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 14px 18px;
+    border: 2px solid #edf2f7;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    outline: none;
+}
+
+.btn-church {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-weight: 700;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 10px 20px -5px var(--primary-glow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-church:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px var(--primary-glow);
+}
+
+.alert-custom {
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.alert-success { background: #d1e7dd; color: #0f5132; }
+.alert-danger { background: #f8d7da; color: #842029; }
+
+/* Dashboard Styles */
+.dashboard-body {
+    background-color: var(--secondary-bg);
+    color: #2d3748;
+    min-height: 100vh;
+}
+
+.navbar-church {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.header-section {
+    background: white;
+    padding: 40px 0;
+    border-bottom: 1px solid #edf2f7;
+    margin-bottom: 40px;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #edf2f7;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.table-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #edf2f7;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #f8fafc;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    padding: 16px 24px;
+    text-align: left;
+}
+
+.table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    font-weight: 600;
+}
+
+.newsletter-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #edf2f7;
+}
+
+.btn-primary-church {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
