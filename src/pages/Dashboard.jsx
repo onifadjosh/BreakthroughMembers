@@ -8,6 +8,7 @@ const Dashboard = ({ user, setUser, API_BASE_URL }) => {
     const [subject, setSubject] = useState('')
     const [content, setContent] = useState('')
     const [selectedUsers, setSelectedUsers] = useState([])
+    const [searchQuery, setSearchQuery] = useState('')
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -71,9 +72,19 @@ const Dashboard = ({ user, setUser, API_BASE_URL }) => {
         }
     }
 
+    const filteredSubscribers = subscribers.filter(s => {
+        const q = searchQuery.toLowerCase()
+        return (
+            (s.firstName && s.firstName.toLowerCase().includes(q)) ||
+            (s.lastName && s.lastName.toLowerCase().includes(q)) ||
+            (s.email && s.email.toLowerCase().includes(q)) ||
+            (s.phoneNumber && s.phoneNumber.toLowerCase().includes(q))
+        )
+    })
+
     const toggleSelectAll = (e) => {
         if (e.target.checked) {
-            setSelectedUsers(subscribers.map(s => s.email))
+            setSelectedUsers(filteredSubscribers.map(s => s.email))
         } else {
             setSelectedUsers([])
         }
@@ -526,11 +537,26 @@ const Dashboard = ({ user, setUser, API_BASE_URL }) => {
 
                             <div className="adm-dashboard">
                                 <div className="adm-panel">
-                                    <h5>Active Subscribers</h5>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                                        <h5>Active Subscribers</h5>
+                                        <div style={{ position: 'relative', width: '220px' }}>
+                                            <input 
+                                                type="text" 
+                                                className="adm-input" 
+                                                placeholder="Search by name, email..."
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                style={{ padding: '6px 10px', fontSize: '11px', height: '32px' }}
+                                            />
+                                        </div>
+                                    </div>
+
                                     {loading ? (
                                         <div style={{ fontSize: 12, color: '#6b6e80', padding: '10px 0' }}>Loading subscribers...</div>
-                                    ) : subscribers.length === 0 ? (
-                                        <div style={{ fontSize: 12, color: '#6b6e80', padding: '10px 0' }}>No subscribers found.</div>
+                                    ) : filteredSubscribers.length === 0 ? (
+                                        <div style={{ fontSize: 12, color: '#6b6e80', padding: '10px 0' }}>
+                                            {searchQuery ? `No subscribers match "${searchQuery}"` : "No subscribers found."}
+                                        </div>
                                     ) : (
                                         <table className="adm-table">
                                             <thead>
@@ -539,7 +565,7 @@ const Dashboard = ({ user, setUser, API_BASE_URL }) => {
                                                         <input
                                                             type="checkbox"
                                                             onChange={toggleSelectAll}
-                                                            checked={selectedUsers.length === subscribers.length && subscribers.length > 0}
+                                                            checked={filteredSubscribers.length > 0 && selectedUsers.length === filteredSubscribers.length}
                                                         />
                                                     </th>
                                                     <th>Name</th>
@@ -548,7 +574,7 @@ const Dashboard = ({ user, setUser, API_BASE_URL }) => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {subscribers.map(sub => (
+                                                {filteredSubscribers.map(sub => (
                                                     <tr key={sub._id}>
                                                         <td>
                                                             <input
